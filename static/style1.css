@@ -1,0 +1,550 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #2ecc71;
+    --secondary-color: #27ae60;
+    --dark-color: #2c3e50;
+    --light-color: #ecf0f1;
+    --danger-color: #e74c3c;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--dark-color);
+}
+
+/* Navbar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    /* background: white; */
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ .logo img {
+    height: 40px;
+} 
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--dark-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+/* Button Styles (Global) */
+button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    background: var(--primary-color);
+    color: white;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    background: var(--secondary-color);
+}
+
+/* Specific Button Overrides */
+.login-btn {
+    background: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+/* Hero Section */
+.hero {
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+    /* background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)),
+                url('../images/hero-bg.jpg') center/cover; */
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.modal-content h2 {
+    margin-bottom: 1.5rem;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+input, select {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Donation Form */
+#donate-section {
+    background: #f8f9fa;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin: 2rem auto;
+    max-width: 500px;
+}
+
+#donate-section h2 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+}
+
+#donateForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#donateForm input,
+#donateForm button {
+    padding: 0.9rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+}
+
+#donateForm input {
+    background: white;
+}
+
+#donateForm input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 5px rgba(46,204,113,0.5);
+}
+
+#donateForm button {
+    background: var(--primary-color);
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+#donateForm button:hover {
+    background: var(--secondary-color);
+}
+
+#uploadStatus {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: var(--danger-color);
+}
+
+/* Listings Section */
+.listings {
+    padding: 4rem 2rem;
+}
+
+.listings h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Food Card */
+.food-card {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.food-card:hover {
+    transform: scale(1.05);
+}
+
+.food-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.food-card p {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Map Section */
+.map-section {
+    padding: 4rem 2rem;
+}
+
+#mapContainer {
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+/* Password Field Container */
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #555;
+}
+
+.toggle-password:hover {
+    color: var(--primary-color);
+}
+
+/* Footer */
+/* Footer Styles */
+.footer {
+    background: #2c3e50; 
+    color: white;
+    padding: 50px 20px;
+    font-size: 1rem;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footer-section h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #2ecc71;
+}
+
+.footer-section p {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.contact-info i {
+    margin-right: 8px;
+    color: #2ecc71;
+}
+
+/* Quick Links */
+.quick-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.quick-links ul li {
+    margin-bottom: 10px;
+}
+
+.quick-links ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.quick-links ul li a:hover {
+    color: #2ecc71;
+}
+
+/* Social Media Icons */
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 1.5rem;
+    transition: color 0.3s ease-in-out;
+}
+
+.social-icons a:hover {
+    color: #2ecc71;
+}
+
+/* Copyright Section */
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .social-icons {
+        justify-content: center;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 1rem;
+        flex-direction: column;
+        box-shadow: var(--shadow);
+    }
+    .nav-links.active {
+        display: flex;
+    }
+    .hero {
+        padding: 6rem 1rem 3rem;
+    }
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .hero-buttons {
+        flex-direction: column;
+    }
+    .hero-buttons button {
+        width: 100%;
+    }
+    .listings-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+.mb-1 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 2rem; }
+
+
+/* About Us Section */
+.about-us {
+    background:"https://img.freepik.com/free-psd/indian-food-illustration-isolated_23-2151851514.jpg?ga=GA1.1.2040509729.1741361487&semt=ais_hybrid";              /* Clean, white background for clarity */
+    padding: 80px 40px;               /* Generous padding for spaciousness */
+    max-width: 800px;                 /* Optimal width for readability */
+    margin: 60px auto;                /* Centered with ample vertical spacing */
+    color: #333;                      /* Dark text for contrast */
+    line-height: 1.8;
+    font-size: 1.1rem;
+    text-align: justify;
+    border-radius: 12px;              /* Rounded corners for a modern touch */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;               /* For positioning decorative elements */
+    overflow: hidden;                 /* To contain any overflow */
+}
+
+.about-us::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 150px;
+    height: 150px;
+    background: #3498db;
+    border-radius: 50%;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.about-us::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: #e74c3c;
+    border-radius: 50%;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.about-us:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Section Heading */
+.about-us h2 {
+    text-align: center;
+    font-size: 2.4rem;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;                      /* Ensure text is above decorative elements */
+}
+
+/* Paragraph Styling */
+.about-us p {
+    margin-bottom: 30px;
+    text-align: justify;
+    text-justify: inter-word;
+    position: relative;
+    z-index: 1;
+}
+
+/* Headings within Paragraphs */
+.about-us p strong {
+    display: block;
+    font-size: 1.2rem;
+    color: #2ecc71;                  /* Use a modern primary color */
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+}
+
+/* Optional: Fade-in Animation for Content */
+.about-us.fade-in {
+    animation: fadeInContent 1s ease-in-out;
+}
+
+@keyframes fadeInContent {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Styles for Smaller Screens */
+@media (max-width: 768px) {
+    .about-us {
+        padding: 50px 20px;
+        font-size: 1rem;
+    }
+    .about-us h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    .about-us p {
+        margin-bottom: 20px;
+    }
+}
