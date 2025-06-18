@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoFood - Sustainable Food Management</title>
+    <link rel="stylesheet" href="./static/style1.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Leaflet CSS for maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+  <style>
+       html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: url('https://img.freepik.com/free-psd/indian-food-illustration-isolated_23-2151851514.jpg?ga=GA1.1.2040509729.1741361487&semt=ais_hybrid') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: -1;
+        }
+        #logo{
+            border-radius: 50%;
+           
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="./static/1logo.png"  class="imglogo" alt="EcoFood Logo">
+        </div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#map">Map</a>
+            <button class="login-btn" onclick="window.location.href='/login'">Login</button>
+            <button class="register-btn" onclick="window.location.href='/signup'">Register</button>
+        </div>
+    </nav>
+
+    <!-- Optional: Login Modal (if you still want it on the index page) -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <select name="userType" required>
+                    <option value="">Select User Type</option>
+                    <option value="donor">Donor</option>
+                    <option value="recipient">Recipient</option>
+                    <option value="volunteer">Volunteer</option>
+                </select>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Welcome to EcoFood</h1>
+        <p>Connecting surplus food with those in need</p>
+        <div class="hero-buttons">
+            <button class="donor-btn">
+                <a href="/donate" style="text-decoration: none; color: white;">Become a Donor</a>
+            </button>
+            <button class="recipient-btn">
+                <a href="/food-list" style="text-decoration: none; color: white;">Find Food</a>
+            </button>
+            <button class="volunteer-btn" style="background-color: #1c6fe4;">
+                <a href="/volunteer" style="text-decoration: none; color: white;"> Become a Volunteer</a>
+            </button>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section" id="map">
+        <h2>Food Distribution Map</h2>
+        <div id="mapContainer"  style="height: 400px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"></div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about-us fade-in" id="about">
+        <h2>About EcoFood</h2>
+        <p class="intro">
+            <strong class="about-heading">Introduction:</strong> EcoFood was born out of the urgent need to address two of the most pressing challenges of our time: food waste and food insecurity. In a world where millions of tons of perfectly edible food are discarded each year, while countless individuals and families struggle to access even the most basic nutrition, EcoFood emerged as a beacon of hope and a model for sustainable resource management. Our journey began with a simple, yet powerful idea—to create a platform that not only reduces food waste but also redistributes surplus food to those in need. Over the years, we have witnessed firsthand the scale of the problem: food waste not only represents a loss of valuable resources but also contributes to environmental degradation through the unnecessary generation of greenhouse gases. EcoFood was conceived to bridge this gap by connecting food donors—ranging from restaurants and supermarkets to households—with charitable organizations, food banks, and communities in need. By leveraging cutting-edge technology, advanced data analytics, and a commitment to social responsibility, we have built a system that is transparent, efficient, and scalable. Our platform is designed to empower communities by facilitating the seamless exchange of surplus food and by creating partnerships that foster trust and collaboration. Through our innovative approach, we aim to ensure that every surplus has the potential to make a difference in someone’s life. Our mission is driven by the belief that technology can be harnessed to solve real-world problems, and that even the smallest contribution can create significant positive impact. With EcoFood, we are not just redistributing food; we are transforming waste into nourishment and turning excess into opportunity. This introduction reflects our passion, our determination, and our unwavering commitment to building a better future—a future where no food goes to waste, and where every individual has access to the nutrition they need to thrive. We invite you to join us on this transformative journey, to become part of a movement that is redefining how we think about food, waste, and community, and to help us spread the message of hope, sustainability, and social justice.
+        </p>
+        <p class="about-details">
+            <strong class="about-heading">About EcoFood:</strong> At its core, EcoFood is more than just a website—it is a comprehensive, community-driven platform that reimagines the food distribution network. Our system is built on robust technology and streamlined logistics that ensure the rapid, safe, and efficient transfer of surplus food from donors to recipients. Through our user-friendly interface, food donors can easily list available surplus items along with essential details such as quantity, expiry date, and pickup location. Simultaneously, charitable organizations and individuals in need can view these listings and request food in real time. EcoFood utilizes data-driven analytics and AI-powered logistics to match supply with demand, optimize routes, and minimize the delay between donation and consumption. Our platform not only addresses the immediate problem of food waste but also contributes to broader environmental and social goals by reducing the carbon footprint associated with waste disposal and by strengthening local food security networks. We work closely with a diverse range of stakeholders—from small local businesses to large corporate entities—to ensure that every surplus is maximized for social good. By fostering transparent transactions and building trust through our reliable system, EcoFood has become a trusted partner for communities across the region. Our commitment to excellence is reflected in every aspect of our service, from the security of our data to the responsiveness of our customer support. EcoFood embodies a spirit of innovation, sustainability, and compassion, aiming to create a world where excess food transforms into a resource for change. We continually invest in new technologies and partnerships to further refine our processes, ensuring that our platform remains agile and responsive to evolving community needs. Our story is one of collaboration and creativity—where every donation is a step toward a more equitable and sustainable future, and every partnership helps rewrite the narrative of food waste into one of hope and abundance.
+        </p>
+        <p class="conclusion">
+            <strong class="about-heading">Conclusion:</strong> In conclusion, EcoFood stands as a testament to the transformative power of combining technology with a social mission. Our platform has redefined how communities can tackle food waste by converting excess into opportunity and by ensuring that surplus food is redirected to those who need it most. As we look to the future, our vision is to expand our network, refine our technologies, and deepen our partnerships to create an even more resilient and responsive system. The success of EcoFood lies not only in the numbers of meals saved or the volume of food redistributed, but also in the empowerment of communities to act collectively in the face of global challenges. We believe that every donated meal, every volunteer action, and every innovative solution contributes to a larger movement towards sustainability and social justice. Our commitment is rooted in transparency, efficiency, and the belief that collaborative efforts can lead to extraordinary outcomes. We are continually evolving, learning from each experience, and striving to build a system that is both scalable and replicable across different regions. As we move forward, we invite donors, recipients, volunteers, and all stakeholders to join us in this mission. Let EcoFood be a model for how technology can drive positive change—one donation, one meal, one community at a time. By embracing new ideas, fostering innovation, and remaining steadfast in our commitment to reduce waste, we are confident that EcoFood will pave the way for a future where food security is a reality for all. Our journey is just beginning, and with every challenge we overcome, we get one step closer to a world where surplus food is never wasted, but instead serves as a vital resource in the fight against hunger. Together, we can transform the narrative of food waste and build a legacy of sustainability, equity, and hope for generations to come.
+        </p>
+    </section>
+    
+    <!-- Footer -->
+    <!-- <footer>
+        <div class="footer-content">
+            <p>Contact Us: info@ecofood.org | +1 (555) 123-4567</p>
+            <p>&copy; 2025 EcoFood. All rights reserved.</p>
+        </div>
+    </footer> -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Company Info -->
+            <div class="footer-section company-info">
+                <h3>EcoFood</h3>
+                <p>Connecting surplus food with those in need</p>
+            </div>
+    
+            <!-- Contact Information -->
+            <div class="footer-section contact-info">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-envelope"></i> infoecofood123@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +91 72497 86958</p>
+                <p><i class="fas fa-map-marker-alt"></i> Vasudev nagar, nagpur</p>
+            </div>
+    
+            <!-- Quick Links -->
+            <div class="footer-section quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="/donate">Donate Food</a></li>
+                    <li><a href="/food-list">Find Food</a></li>
+                    <li><a href="/volunteer">Volunteer</a></li>
+                </ul>
+            </div>
+    
+            <!-- Social Media -->
+            <div class="footer-section social-media">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/share/18q1CwBai6/?mibextid=qi2Omg"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="http://www.linkedin.com/in/eco-food-197050356"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Copyright Section -->
+        <div class="footer-bottom">
+            <p>&copy; 2025 EcoFood. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src=".\static\script.js"></script>
+    <script src=".\static\map.js"></script>
+</body>
+</html>

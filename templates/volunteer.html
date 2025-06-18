@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Signup | EcoFood</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+        }
+        
+        h2, h3 {
+            color: #2c3e50;
+        }
+        
+        .volunteer-info, .volunteer-form, .volunteer-contact {
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        input, select, button {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        
+        button {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #219150;
+        }
+        
+        a {
+            color: #27ae60;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Join as a Volunteer</h2>
+        <a href="{{ url_for('home') }}">Back to Home</a>
+    </header>
+    <section class="volunteer-info">
+        <h3>Why Volunteer with EcoFood?</h3>
+        <p>Be part of a mission to reduce food waste and feed the hungry. As a volunteer, you can help in:</p>
+        <ol>  <!-- Changed from <ul> to <ol> -->
+            <li>Picking up and delivering food to NGOs</li>
+            <li>Coordinating with food donors</li>
+            <li>Managing distribution events</li>
+        </ol>
+    </section>
+    
+    <section class="volunteer-form">
+        <h3>Sign Up to Volunteer</h3>
+        <form id="volunteerForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="availability">Availability:</label>
+            <select id="availability" name="availability" required>
+                <option value="Weekends">Weekends</option>
+                <option value="Weekdays">Weekdays</option>
+                <option value="Anytime">Anytime</option>
+            </select>
+
+            <button type="submit">Register</button>
+        </form>
+    </section>
+
+    <section class="volunteer-contact">
+        <h3>Other Ways to Connect</h3>
+        <p>For any questions, reach out to us:</p>
+        <p>Email: <a href="mailto:volunteerecofood@gmail.com">volunteerecofood@gmail.com</a></p>
+        <p>WhatsApp: <a href="https://wa.me/+91 72497 86958" target="_blank">Message Us</a></p>
+    </section>
+
+    <script>
+            document.getElementById("volunteerForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+        
+                const volunteerData = {
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    phone: document.getElementById("phone").value
+                };
+        
+                fetch("/volunteer", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(volunteerData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    document.getElementById("volunteerForm").reset();
+                })
+                .catch(error => console.error("Error:", error));
+            });
+        </script>
+</body>
+</html>

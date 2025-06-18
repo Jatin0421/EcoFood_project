@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - EcoFood</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+    /* Fullscreen Preloader */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+  }
+  
+  /* Preloader Logo */
+  .preloader-logo {
+    width: 100px; /* Adjust as needed */
+    height: auto;
+    margin-bottom: 15px;
+  }
+  
+  /* Fade-in effect for main content */
+  #main-content {
+    display: none;
+  }
+  
+  /* Body Styling */
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom right, #f8f9fa, #ffffff);
+    color: #333;
+  }
+  
+  /* Navbar */
+  .navbar-brand, .nav-link {
+    color: #ffffff !important;
+  }
+  .nav-link:hover {
+    color: #ffc107 !important;
+  }
+  
+  /* Hero Image */
+  .image-container {
+    position: relative;
+    text-align: center;
+  }
+  
+  .fade-in-image {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  /* Cards */
+  .card-equal {
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    margin-bottom: 2rem;
+  }
+  .card-equal:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* Buttons */
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+  }
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }  
+</style>
+</head>
+<body>
+  
+  <!-- Preloader (Logo Spinner) -->
+  <div id="preloader">
+    <img src="{{ url_for('static', filename='./static/logo.png') }}" alt="EcoFood Logo" class="preloader-logo" />
+    <div class="spinner-border text-success" role="status"></div>
+  </div>
+
+  <!-- Main Page Content (Initially Hidden) -->
+  <div id="main-content" style="display: none;">
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+      <a class="navbar-brand" href="{{ url_for('dashboard') }}">EcoFood</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="C:\Users\jatin\OneDrive\Desktop\ECOFOOD\donate.html">Donate Food</a></li>
+          <li class="nav-item"><a class="nav-link" href="C:\Users\jatin\OneDrive\Desktop\ECOFOOD\food-list.html">Food List</a></li>
+          <li class="nav-item"><a class="nav-link" href="C:\Users\jatin\OneDrive\Desktop\ECOFOOD\volunteer.html">Volunteer</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Image Section -->
+    <div class="image-container text-center mt-3">
+      <img src="{{ url_for('static', filename='images/ecofood_banner.jpg') }}" alt="EcoFood Banner" class="fade-in-image" />
+    </div>
+
+    <!-- Dashboard Content -->
+    <div class="container dashboard-container">
+      <h1 class="text-center mb-3">Welcome, {{ user.username or user.email }}!</h1>
+      <p class="lead text-center mb-5">This is your dashboard where you can manage your EcoFood activities.</p>
+      
+      <div class="row">
+        <div class="col-md-4 d-flex align-items-stretch">
+          <div class="card shadow card-equal">
+            <div class="card-body text-center d-flex flex-column">
+              <h5 class="card-title">Donate Food</h5>
+              <p class="card-text flex-grow-1">Help feed others by donating food items.</p>
+              <a href="{{ url_for('donate_food') }}" class="btn btn-primary mt-auto">Donate Now</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 d-flex align-items-stretch">
+          <div class="card shadow card-equal">
+            <div class="card-body text-center d-flex flex-column">
+              <h5 class="card-title">View Food List</h5>
+              <p class="card-text flex-grow-1">Browse available food donations.</p>
+              <a href="{{ url_for('get_food_list') }}" class="btn btn-primary mt-auto">View List</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 d-flex align-items-stretch">
+          <div class="card shadow card-equal">
+            <div class="card-body text-center d-flex flex-column">
+              <h5 class="card-title">Volunteer</h5>
+              <p class="card-text flex-grow-1">Sign up to volunteer and help the community.</p>
+              <a href="{{ url_for('volunteer_signup') }}" class="btn btn-primary mt-auto">Sign Up</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Preloader Script -->
+  <script>
+    $(document).ready(function() {
+      setTimeout(function() {
+        $('#preloader').fadeOut('slow', function() {
+          $('#main-content').fadeIn('slow');
+        });
+      }, 2000); // Change to 3000 for 3 seconds delay
+    });
+  </script>
+
+</body>
+</html>

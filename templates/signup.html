@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup | EcoFood</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ece9e6, #ffffff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .auth-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px;
+            min-height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .input-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+            background: #f9f9f9;
+        }
+
+        /* Toggle Password */
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            color: #888;
+        }
+
+        /* Styled button */
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #2ecc71;
+            color: white;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: #27ae60;
+        }
+
+        /* Terms & Conditions */
+        .terms {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            justify-content: center;
+        }
+
+        .terms input {
+            width: auto;
+        }
+
+        /* Collapsible Terms & Conditions */
+        .terms-text {
+            text-align: left;
+            font-size: 12px;
+            color: #555;
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            transition: all 0.3s ease-in-out;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 5px;
+        }
+
+        .terms-text p {
+            margin: 5px 0;
+        }
+
+        /* Expand/Collapse Icon */
+        .toggle-terms {
+            cursor: pointer;
+            color: #007bff;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .toggle-terms:hover {
+            text-decoration: underline;
+        }
+
+        /* Google Signup */
+        .google-signup {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .auth-container {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Signup to EcoFood</h2>
+        <form id="signupForm">
+            <div class="input-container">
+                <input type="text" id="fullName" placeholder="Full Name" required>
+            </div>
+            <div class="input-container">
+                <input type="email" id="signupEmail" placeholder="Email" required>
+            </div>
+            <div class="input-container">
+                <input type="tel" id="signupPhone" placeholder="Phone Number" required>
+            </div>
+            <div class="input-container">
+                <input type="password" id="signupPassword" placeholder="Password" required>
+                <span class="toggle-password" onclick="togglePassword('signupPassword')">👁️</span>
+            </div>
+            <div class="input-container">
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                <span class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</span>
+            </div>
+            <select id="signupRole" required>
+                <option value="Donor">Donor</option>
+                <option value="Recipient">Recipient</option>
+            </select>
+
+            <div class="terms">
+                <input type="checkbox" id="termsCheckbox" required>
+                <label for="termsCheckbox">I agree to the <span class="toggle-terms" onclick="toggleTerms()">Terms & Conditions</span></label>
+            </div>
+
+            <!-- Collapsible Terms & Conditions -->
+            <div class="terms-text" id="termsContent">
+                <p><strong>1. User Responsibilities:</strong> By signing up, you agree to use the platform responsibly. Misuse of the service may result in account suspension.</p>
+                <p><strong>2. Data Privacy:</strong> We collect and store your personal details securely. We do not sell your data to third parties.</p>
+                <p><strong>3. Food Safety:</strong> Donors must ensure that donated food is fresh and safe for consumption. Recipients should check food quality before use.</p>
+                <p><strong>4. Service Availability:</strong> EcoFood reserves the right to update or modify the platform at any time for better user experience.</p>
+                <p><strong>5. Liability Disclaimer:</strong> EcoFood is not responsible for any food-related health issues. Users accept all risks associated with food donations.</p>
+            </div>
+
+            <button type="submit">Signup</button>
+        </form>
+
+        <!-- Google Signup -->
+        <div class="google-signup">
+            <div id="g_id_onload"
+                data-client_id="http://506213310904-1ebjgjka0iclgmjjjfvauu286u3eaje7.apps.googleusercontent.com"
+                data-callback="handleCredentialResponse">
+            </div>
+            <div class="g_id_signin" data-type="standard"></div>
+        </div>
+
+        <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+    </div>
+
+    <script>
+        function togglePassword(inputId) {
+            const passwordField = document.getElementById(inputId);
+            const toggleIcon = passwordField.parentElement.querySelector(".toggle-password");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcon.textContent = "🔓";
+            } else {
+                passwordField.type = "password";
+                toggleIcon.textContent = "👁️";
+            }
+        }
+
+        function toggleTerms() {
+            const termsContent = document.getElementById("termsContent");
+            termsContent.style.display = termsContent.style.display === "none" || termsContent.style.display === "" ? "block" : "none";
+        }
+    </script>
+</body>
+</html>

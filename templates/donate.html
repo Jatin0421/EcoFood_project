@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Food | EcoFood</title>
+    <!-- <link rel="stylesheet" href="styles.css"> Link your CSS -->
+<style>  
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background: #2a9d8f;
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    margin-left: 15px;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+/* Form Styling */
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Submit Button */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #2a9d8f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #21867a;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    form {
+        max-width: 90%;
+    }
+}
+
+</style>
+</head>
+<body>
+     <!-- Preloader -->
+     <div class="preloader">
+        <img src="logo.png" alt="EcoFood Logo" class="preloader-logo">
+    </div>
+    <header>
+        <h2>Donate Food</h2>
+        <a href="index.html">Back to Home</a>
+    </header>
+
+    <form id="donateForm">
+        <label for="foodName">Food Name:</label>
+        <input type="text" id="foodName" name="foodName" required>
+
+        <label for="quantity">Quantity (kg/liters/units):</label>
+        <input type="number" id="quantity" name="quantity" required>
+
+        <label for="expiryDate">Expiry Date:</label>
+        <input type="date" id="expiryDate" name="expiryDate" required>
+
+        <label for="location">Pickup Location:</label>
+        <input type="text" id="location" name="location" required>
+
+        <label for="contact">Contact Number:</label>
+        <input type="tel" id="contact" name="contact" required>
+
+        <button type="submit">Donate</button>
+    </form>
+
+        <script>    
+        document.getElementById("donateForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                
+                // Capture donation data BEFORE resetting the form
+                const donationData = {
+                    foodName: document.getElementById("foodName").value,
+                    quantity: document.getElementById("quantity").value,
+                    expiryDate: document.getElementById("expiryDate").value,
+                    location: document.getElementById("location").value,
+                    contact: document.getElementById("contact").value
+                };
+            
+                // Optionally, show a message before sending (or after, as per your design)
+                // alert("Thank you for your donation! Our team will contact you soon.");
+            
+                fetch("/donate", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(donationData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);  // Show success message from backend
+                    document.getElementById("donateForm").reset();  // Now reset the form
+                })
+                .catch(error => console.error("Error:", error));
+            });
+            
+        </script>
+</body>
+</html>

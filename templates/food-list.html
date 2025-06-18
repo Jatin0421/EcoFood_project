@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Food | EcoFood</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to External CSS -->
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: #2a9d8f;
+            color: white;
+            width: 100%;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            margin-left: 15px;
+        }
+
+        header a:hover {
+            text-decoration: underline;
+        }
+
+        /* Food Container */
+        #foodContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 20px auto;
+            gap: 20px;
+        }
+
+        /* Food Item Card */
+        .food-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            width: 280px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .food-item:hover {
+            transform: scale(1.05);
+        }
+
+        .food-item img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .food-item h3 {
+            color: #2a9d8f;
+            margin-bottom: 10px;
+        }
+
+        .food-item p {
+            font-size: 16px;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        /* Availability Badge */
+        .availability {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #27ae60;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .not-available {
+            background: #e74c3c;
+        }
+
+        /* Order Button */
+        .food-item button {
+            margin-top: 10px;
+            padding: 10px;
+            background: #2a9d8f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        .food-item button:hover {
+            background: #21867a;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #foodContainer {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Available Food Listings</h2>
+        <a href="{{ url_for('home') }}">Back to Home</a>
+    </header>
+
+    <div id="foodContainer">
+        <!-- Dynamic food items will be loaded here -->
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const foodData = [
+                { name: "Fresh Bread", quantity: "5 Loaves", location: "Nagpur", price: "25/-", image: "https://images.pexels.com/photos/31036607/pexels-photo-31036607/free-photo-of-rustic-loaf-of-bread-with-wheat-on-wooden-board.jpeg?auto=compress&cs=tinysrgb&w=600", available: true },
+                { name: "Milk", quantity: "3 Liters", location: "Nagpur", price: "59/-", image: "https://cdn.pixabay.com/photo/2017/09/22/21/35/milk-2777163_1280.jpg", available: false },
+                { name: "Vegetables", quantity: "5 Kg", location: "Nagpur", price: "69/-", image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce", available: true },
+                { name: "Fruits", quantity: "4 Kg", location: "Nagpur", price: "49/-", image: "https://images.unsplash.com/photo-1514995428455-447d4443fa7f", available: true },
+                { name: "Rice Pack", quantity: "2 Kg", location: "Nagpur", price: "49/-", image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0", available: false },
+                { name: "Eggs (1 Dozen)", quantity: "12 Eggs", location: "Nagpur", price: "49/-", image: "https://cdn.pixabay.com/photo/2018/05/17/17/07/fried-3409076_1280.jpg", available: true },
+                { name: "Pasta Pack", quantity: "3 Packs", location: "Nagpur", price: "39/-", image: "https://cdn.pixabay.com/photo/2010/12/13/10/00/pasta-2093_1280.jpg", available: false },
+                { name: "Sugar cubes", quantity: "5 Kg", location: "Nagpur", price: "69", image: "https://cdn.pixabay.com/photo/2019/08/06/13/56/sugar-4388458_1280.jpg", available: true },
+                { name: "Cooking Oil", quantity: "2 Liters", location: "Nagpur", price: "79/-", image: "https://cdn.pixabay.com/photo/2019/09/17/06/46/oil-4482643_1280.jpg", available: false }
+            ];
+
+            let foodContainer = document.getElementById("foodContainer");
+            foodContainer.innerHTML = "";
+
+            foodData.forEach(food => {
+                let foodItem = `
+                    <div class="food-item">
+                        <span class="availability ${food.available ? '' : 'not-available'}">${food.available ? 'Available' : 'Currently Not Available'}</span>
+                        <img src="${food.image}" alt="${food.name}">
+                        <h3>${food.name}</h3>
+                        <p><strong>Quantity:</strong> ${food.quantity}</p>
+                        <p><strong>Location:</strong> ${food.location}</p>
+                        <p><strong>Price:</strong> ${food.price}</p>
+                        <button ${food.available ? '' : 'disabled'} onclick="orderFood('${food.name}')">${food.available ? 'Order Now' : 'Out of Stock'}</button>
+                    </div>
+                `;
+                foodContainer.innerHTML += foodItem;
+            });
+        });
+
+        function orderFood(foodName) {
+            alert(`You have ordered ${foodName}. Your request is being processed.`);
+        }
+    </script>
+</body>
+</html>
